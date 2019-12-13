@@ -167,6 +167,13 @@ The HTTP method to use for the request (e.g. 'POST', 'GET', 'PUT').
 ### replaceTarget
 Optionally used along with the target option. Set to true if the target should be replaced or false if only the target contents should be replaced.
 
+### requestFormat
+The encoding format to use for the request body. The following values are supported:
+
+* `form` : HTTP form (x-www-form-urlencoded) format, this is default option.
+* `json` : JSON encoded string 
+  * You may need polyfill JSON functionality with old browsers, recommending: https://github.com/douglascrockford/JSON-js/blob/master/json2.js
+  
 ### resetForm
 Boolean flag indicating whether the form should be reset if the submit is successful
 
