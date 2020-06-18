@@ -31,11 +31,11 @@ See [issue #544](https://github.com/jquery-form/form/issues/544) for more inform
 
 ### CDN
 ```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
 ```
 or
 ```html
-<script src="https://cdn.jsdelivr.net/gh/jquery-form/form@4.2.2/dist/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/gh/jquery-form/form@4.3.0/dist/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
 ```
 
 ---
@@ -102,6 +102,15 @@ beforeSubmit: function(arr, $form, options) {
     // form data array is an array of objects with name and value properties
     // [ { name: 'username', value: 'jresig' }, { name: 'password', value: 'secret' } ]
     // return false to cancel submit
+}
+````
+
+### beforeFormUnbind
+Callback function invoked before form events unbind and bind again. Provides an opportunity to manipulate the form before events will be remounted. The callback is invoked with two arguments: the jQuery wrapped form object and the options object.
+
+````javascript
+beforeFormUnbind: function($form, options) {
+    // your callback code
 }
 ````
 

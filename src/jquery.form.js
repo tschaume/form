@@ -1,6 +1,6 @@
 /*!
  * jQuery Form Plugin
- * version: 4.2.2
+ * version: 4.3.0
  * Requires jQuery v1.7.2 or later
  * Project repository: https://github.com/jquery-form/form
 
@@ -136,7 +136,7 @@
 		}
 
 		/* eslint consistent-this: ["error", "$form"] */
-		var method, action, url, $form = this;
+		var method, action, url, isMsie, iframeSrc, $form = this;
 
 		if (typeof options === 'function') {
 			options = {success: options};
@@ -165,13 +165,17 @@
 			// clean url (don't include hash vaue)
 			url = (url.match(/^([^#]+)/) || [])[1];
 		}
+		// IE requires javascript:false in https, but this breaks chrome >83 and goes against spec.
+		// Instead of using javascript:false always, let's only apply it for IE.
+		isMsie = /(MSIE|Trident)/.test(navigator.userAgent || '');
+		iframeSrc = (isMsie && /^https/i.test(window.location.href || '')) ? 'javascript:false' : 'about:blank'; // eslint-disable-line no-script-url
 
 		options = $.extend(true, {
 			url       : url,
 			success   : $.ajaxSettings.success,
 			type      : method || $.ajaxSettings.type,
 			requestFormat: 'form',
-			iframeSrc : /^https/i.test(window.location.href || '') ? 'javascript:false' : 'about:blank'		// eslint-disable-line no-script-url
+			iframeSrc : iframeSrc
 		}, options);
 
 		// hook for manipulating the form data before it is extracted;
@@ -1018,6 +1022,10 @@
 				.on('click.form-plugin', this.selector, options, captureSubmittingElement);
 
 			return this;
+		}
+
+		if (options.beforeFormUnbind) {
+			options.beforeFormUnbind(this, options);
 		}
 
 		return this.ajaxFormUnbind()
